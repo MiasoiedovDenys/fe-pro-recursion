@@ -22,7 +22,10 @@ export const deepEqual = (obj, anotherObject) => {
 export const deepCopy = (obj) => {
     if (typeof obj !== 'object' || obj === null || obj === undefined) {
         return obj;
-    } else {
+    } 
+    if (Array.isArray(obj)) {
+        return obj.map(elem => deepCopy(elem));
+    }    else {
         return Object.entries(obj).reduce((accum, [prop, value]) => (accum[prop] = deepCopy(value), accum), {});
     }
 };
